@@ -1,0 +1,8 @@
+/etc/X11/xorg.conf.d/00-keyboard.conf
+
+Section "InputClass"
+    Identifier "keyboard"
+    MatchIsKeyboard "yes"
+    option "XkbLayout" "hu"
+    option "XkbVariant" "nodeadkeys"
+EndSection
