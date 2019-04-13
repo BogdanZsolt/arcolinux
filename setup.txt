@@ -1,0 +1,3 @@
+#Enable TRIM for SSD
+sudo systemctl enable fstrim.timer
+sudo systemctl start fstrim.timer
