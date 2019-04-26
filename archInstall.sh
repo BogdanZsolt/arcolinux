@@ -15,14 +15,11 @@ mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/sda3
 mount /dev/sda2 /mnt
 mkdir /mnt/boot
-mkdir /mnt/boot/EFI
 mkdir /mnt/home
-#mount /dev/sda1 /mnt/boot
 mount /dev/sda3 /mnt/home
 nano /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel
 genfstab -U /mnt >> /mnt/etc/fstab
-#arch-chroot /mnt
 ln -sf /mnt/usr/share/zoneinfo/Europe/Budapest /mnt/etc/localtime
 hwclock --systohc
 cat << EOF >> /mnt/etc/locale.gen
@@ -52,8 +49,29 @@ cat << EOF >> /mnt/etc/hosts
 127.0.0.1 LucykaNotebook02.localdomain LucykaNotebook02
 EOF
 pacstrap /mnt networkmanager
-#systemctl enable NetworkManager
 nano /mnt/etc/mkinitcpio.conf
-#passwd
-#pacstrap /mnt grub efibootmgr
-#grub-install --target=x86_64-efi --efi-directory=/boot --recheck
+cat << EOF > /mnt/home/arcIntall2phase.sh
+#!/bin/bash
+set -e
+locale-gen
+systemctl enable NetworkManager
+passwd
+pacman -S grub efibootmgr
+mkdir /boot/efi
+mount /dev/sda1 /boot/efi
+grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
+mkdir /boot/efi/EFI/BOOT
+cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
+echo bcfg boot add 1 fs0:\EFI\GRUB\grubx64.efi "My GRUB bootloader" > /boot/efi/startup.nsh
+echo exit >> /boot/efi/startup.nsh
+echo 
+echo Next, unmount all mounted partitions and reboot the system:
+echo exit
+echo umount -R /mnt
+echo reboot
+EOF
+chmod 777 /mnt/home/arcIntall2phase.sh
+echo ""
+echo "Run arch-chroot. In the /home directory you can find a scrip arcIntall2phase.sh. Run this for end the Installation."
+exit 0
