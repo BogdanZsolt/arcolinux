@@ -15,8 +15,9 @@ mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/sda3
 mount /dev/sda2 /mnt
 mkdir /mnt/boot
+mkdir /mnt/boot/EFI
 mkdir /mnt/home
-mount /dev/sda1 /mnt/boot
+#mount /dev/sda1 /mnt/boot
 mount /dev/sda3 /mnt/home
 nano /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel
@@ -51,9 +52,8 @@ cat << EOF >> /mnt/etc/hosts
 127.0.0.1 LucykaNotebook02.localdomain LucykaNotebook02
 EOF
 pacstrap /mnt networkmanager
-systemctl enable NetworkManager
+#systemctl enable NetworkManager
 nano /mnt/etc/mkinitcpio.conf
 #passwd
 #pacstrap /mnt grub efibootmgr
 #grub-install --target=x86_64-efi --efi-directory=/boot --recheck
-#grub-mkconfig -o /boot/grub/grub.cfg
