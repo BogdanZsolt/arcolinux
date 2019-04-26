@@ -53,7 +53,7 @@ EOF
 pacstrap /mnt networkmanager
 systemctl enable NetworkManager
 nano /mnt/etc/mkinitcpio.conf
-passwd
-pacstrap /mnt grub efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot --recheck
-grub-mkconfig -o /boot/grub/grub.cfg
+#passwd
+#pacstrap /mnt grub efibootmgr
+#grub-install --target=x86_64-efi --efi-directory=/boot --recheck
+#grub-mkconfig -o /boot/grub/grub.cfg
