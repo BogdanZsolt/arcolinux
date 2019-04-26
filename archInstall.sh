@@ -70,8 +70,9 @@ echo Next, unmount all mounted partitions and reboot the system:
 echo exit
 echo umount -R /mnt
 echo reboot
+rm /home/arcIntall2phase.sh
 EOF
 chmod 777 /mnt/home/arcIntall2phase.sh
 echo ""
-echo "Run arch-chroot. In the /home directory you can find a scrip arcIntall2phase.sh. Run this for end the Installation."
+echo "Run arch-chroot /mnt. In the /home directory you can find a scrip arcIntall2phase.sh. Run this for end the Installation."
 exit 0
