@@ -48,8 +48,8 @@ cat << EOF >> /mnt/etc/hosts
 EOF
 pacstrap /mnt networkmanager
 nano /mnt/etc/mkinitcpio.conf
-cp arcIntall3phase.sh /mnt/root/arcIntall3phase.sh
-cat << EOF > /mnt/home/arcIntall2phase.sh
+cp archIntall3phase.sh /mnt/root/archIntall3phase.sh
+cat << EOF > /mnt/home/archIntall2phase.sh
 #!/bin/bash
 set -e
 locale-gen
@@ -71,7 +71,7 @@ echo umount -R /mnt
 echo reboot
 rm /home/arcIntall2phase.sh
 EOF
-chmod 777 /mnt/home/arcIntall2phase.sh
+chmod 777 /mnt/home/archIntall2phase.sh
 echo ""
-echo "Run arch-chroot /mnt. In the /home directory you can find a scrip arcIntall2phase.sh. Run this for end the Installation."
+echo "Run arch-chroot /mnt. In the /home directory you can find a scrip archIntall2phase.sh. Run this for continue the Installation."
 exit 0
