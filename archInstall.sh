@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-ping -c 3 archlinux.org
-efivar -l
 loadkeys hu
 timedatectl set-ntp true
 wipefs -a /dev/sda
@@ -50,6 +48,7 @@ cat << EOF >> /mnt/etc/hosts
 EOF
 pacstrap /mnt networkmanager
 nano /mnt/etc/mkinitcpio.conf
+cp arcIntall3phase.sh /mnt/root/arcIntall3phase.sh
 cat << EOF > /mnt/home/arcIntall2phase.sh
 #!/bin/bash
 set -e
