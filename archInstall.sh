@@ -48,7 +48,7 @@ cat << EOF >> /mnt/etc/hosts
 EOF
 pacstrap /mnt networkmanager
 nano /mnt/etc/mkinitcpio.conf
-cp archIntall3phase.sh /mnt/root/archIntall3phase.sh
+cp archInstall3phase.sh /mnt/root/archInstall3phase.sh
 cat << EOF > /mnt/home/archIntall2phase.sh
 #!/bin/bash
 set -e
