@@ -69,7 +69,7 @@ echo Next, unmount all mounted partitions and reboot the system:
 echo exit
 echo umount -R /mnt
 echo reboot
-rm /home/arcIntall2phase.sh
+rm /home/archIntall2phase.sh
 EOF
 chmod 777 /mnt/home/archIntall2phase.sh
 echo ""
