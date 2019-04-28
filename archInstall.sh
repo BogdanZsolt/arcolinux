@@ -91,7 +91,7 @@ chown shiru:users /home/shiru/temp
 echo "#!/bin/bash" > /home/shiru/temp/archInstallPhase4.sh
 echo set -e >> /home/shiru/temp/archInstallPhase4.sh
 echo >> /home/shiru/temp/archInstallPhase4.sh
-echo git clone https://github.com/arcolinuxd/arco-qtile /home/shiru/temp/arco-qtile >> /home/shiru/temp/archInstallPhase4.sh
+echo git clone https://github.com/arcolinuxd/arco-i3 >> /home/shiru/temp/archInstallPhase4.sh
 echo git clone https://aur.archlinux.org/trizen.git >> /home/shiru/temp/archInstallPhase4.sh
 echo cd trizen >> /home/shiru/temp/archInstallPhase4.sh
 echo makepkg -si >> /home/shiru/temp/archInstallPhase4.sh
