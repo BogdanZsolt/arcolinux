@@ -75,7 +75,7 @@ echo "**                                                                  **"
 echo "**********************************************************************"
 rm /home/archIntallPhase2.sh
 EOF
-chmod 766 /mnt/root/archIntall2phase.sh
+chmod 766 /mnt/root/archIntallphase2.sh
 cat << EOF > /mnt/root/archInstallPhase3.sh
 #!/bin/bash
 set -e
@@ -99,6 +99,12 @@ echo trizen -Suyy >> /home/shiru/temp/archInstallPhase4.sh
 echo trizen -S yay >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xf86-video-intel >> /home/shiru/temp/archInstallPhase4.sh
+echo Section "InputClass" > /etc/X11/xorg.conf.d/00-keyboard.conf
+echo        Identifier "system-keyboard" >> /etc/X11/xorg.conf.d/00-keyboard.conf
+echo        MatchIsKeyboard "on" >> /etc/X11/xorg.conf.d/00-keyboard.conf
+echo        Option "XkbLayout" "hu" >> /etc/X11/xorg.conf.d/00-keyboard.conf
+echo        Option "XkbModel" "latitude" >> /etc/X11/xorg.conf.d/00-keyboard.conf
+echo EndSection >> /etc/X11/xorg.conf.d/00-keyboard.conf
 chown shiru home/shiru/temp/archInstallPhase4.sh
 chmod 777 home/shiru/temp/archInstallPhase4.sh
 echo 
@@ -109,6 +115,7 @@ echo *  in your temp directory ~/temp.                                          
 echo *                                                                                     *
 echo ***************************************************************************************
 EOF
+chmod 766 /mnt/root/archInstallPhase3.sh
 echo 
 echo "****************************************************************************************************************************************" 
 echo "* Run arch-chroot /mnt. After in the /home directory you can find a scrip archIntall2phase.sh. Run this for continue the Installation. *"
