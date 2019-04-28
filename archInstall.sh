@@ -48,12 +48,12 @@ cat << EOF >> /mnt/etc/hosts
 EOF
 pacstrap /mnt networkmanager
 nano /mnt/etc/mkinitcpio.conf
-cp archInstall3phase.sh /mnt/root/archInstall3phase.sh
-cat << EOF > /mnt/home/archIntall2phase.sh
+cat << EOF > /mnt/root/archIntallPhase2.sh
 #!/bin/bash
 set -e
 locale-gen
 systemctl enable NetworkManager
+sudo pacman -S network-manager-applet xfce4-notifyd
 passwd
 pacman -S grub efibootmgr
 mkdir /boot/efi
@@ -65,13 +65,52 @@ cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
 echo bcfg boot add 1 fs0:\EFI\GRUB\grubx64.efi "My GRUB bootloader" > /boot/efi/startup.nsh
 echo exit >> /boot/efi/startup.nsh
 echo 
-echo Next, unmount all mounted partitions and reboot the system:
-echo exit
-echo umount -R /mnt
-echo reboot
-rm /home/archIntall2phase.sh
+echo "**********************************************************************"
+echo "**                                                                  **"
+echo "**  Next, unmount all mounted partitions and reboot the system:     **"
+echo "**  exit                                                            **"
+echo "**  umount -R /mnt                                                  **"
+echo "**  reboot                                                          **"
+echo "**                                                                  **"
+echo "**********************************************************************"
+rm /home/archIntallPhase2.sh
 EOF
-chmod 777 /mnt/home/archIntall2phase.sh
-echo ""
-echo "Run arch-chroot /mnt. In the /home directory you can find a scrip archIntall2phase.sh. Run this for continue the Installation."
+chmod 766 /mnt/root/archIntall2phase.sh
+cat << EOF > /mnt/root/archInstallPhase3.sh
+#!/bin/bash
+set -e
+echo [multilib] >> /etc/pacman.conf
+echo Include = /etc/pacman.d/mirrorlist >> /etc/pacman.conf
+pacman -Suy
+pacman -S bash-completion
+useradd -m -g users -G audio,video,network,wheel,storage -s /bin/bash shiru
+passwd shiru
+EDITOR=nano visudo
+pacman -S git --noconfirm
+mkdir /home/shiru/temp
+echo #!/bin/bash > /home/shiru/temp/archInstallPhase4.sh
+echo set -e >> /home/shiru/temp/archInstallPhase4.sh
+echo >> /home/shiru/temp/archInstallPhase4.sh
+echo git clone https://github.com/arcolinuxd/arco-qtile /home/shiru/temp/arco-qtile >> /home/shiru/temp/archInstallPhase4.sh
+echo git clone https://aur.archlinux.org/trizen.git >> /home/shiru/temp/archInstallPhase4.sh
+echo cd trizen >> /home/shiru/temp/archInstallPhase4.sh
+echo makepkg -si >> /home/shiru/temp/archInstallPhase4.sh
+echo trizen -Suyy >> /home/shiru/temp/archInstallPhase4.sh
+echo trizen -S yay >> /home/shiru/temp/archInstallPhase4.sh
+echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm >> /home/shiru/temp/archInstallPhase4.sh
+echo sudo pacman -S xf86-video-intel >> /home/shiru/temp/archInstallPhase4.sh
+chown shiru home/shiru/temp/archInstallPhase4.sh
+chmod 777 home/shiru/temp/archInstallPhase4.sh
+echo 
+echo ***************************************************************************************
+echo *                                                                                     *
+echo *  logout from root user & login your user account. Runing archInstallPase4.sh script *
+echo *  in your temp directory ~/temp.                                                     *
+echo *                                                                                     *
+echo ***************************************************************************************
+EOF
+echo 
+echo "****************************************************************************************************************************************" 
+echo "* Run arch-chroot /mnt. After in the /home directory you can find a scrip archIntall2phase.sh. Run this for continue the Installation. *"
+echo "****************************************************************************************************************************************"
 exit 0
