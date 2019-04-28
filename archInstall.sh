@@ -101,6 +101,7 @@ echo sudo pacman -S xf86-video-intel --noconfirm >> /home/shiru/temp/archInstall
 echo sudo mv /home/shiru/temp/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf >> /home/shiru/temp/archInstallPhase4.sh
 chown shiru /home/shiru/temp/archInstallPhase4.sh
 chmod 777 /home/shiru/temp/archInstallPhase4.sh
+mv /root/00-keyboard.conf /home/shiru/temp/00-keyboard.conf 
 echo 
 echo "***************************************************************************************"
 echo "*                                                                                     *"
@@ -108,10 +109,10 @@ echo "*  logout from root user & login your user account. Runing archInstallPase
 echo "*  in your temp directory ~/temp.                                                     *"
 echo "*                                                                                     *"
 echo "***************************************************************************************"
-rm /mnt/root/archInstallPhase3.sh
+rm /root/archInstallPhase3.sh
 EOF
 chmod 766 /mnt/root/archInstallPhase3.sh
-cat << EOF > /home/shiru/temp/00-keyboard.conf
+cat << EOF > /mnt/root/00-keyboard.conf
 Section "InputClass"
        Identifier "system-keyboard"
        MatchIsKeyboard "on" 
