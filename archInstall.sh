@@ -87,7 +87,8 @@ passwd shiru
 EDITOR=nano visudo
 pacman -S git --noconfirm
 mkdir /home/shiru/temp
-echo #!/bin/bash > /home/shiru/temp/archInstallPhase4.sh
+chown shiru:users /home/shiru/temp
+echo "#!/bin/bash" > /home/shiru/temp/archInstallPhase4.sh
 echo set -e >> /home/shiru/temp/archInstallPhase4.sh
 echo >> /home/shiru/temp/archInstallPhase4.sh
 echo git clone https://github.com/arcolinuxd/arco-qtile /home/shiru/temp/arco-qtile >> /home/shiru/temp/archInstallPhase4.sh
