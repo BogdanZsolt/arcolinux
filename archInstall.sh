@@ -72,7 +72,7 @@ echo "**  umount -R /mnt                                                  **"
 echo "**  reboot                                                          **"
 echo "**                                                                  **"
 echo "**********************************************************************"
-rm /home/archIntallPhase2.sh
+rm /root/archInstallPhase2.sh
 EOF
 chmod 766 /mnt/root/archInstallPhase2.sh
 cat << EOF > /mnt/root/archInstallPhase3.sh
@@ -96,25 +96,29 @@ echo cd trizen >> /home/shiru/temp/archInstallPhase4.sh
 echo makepkg -si >> /home/shiru/temp/archInstallPhase4.sh
 echo trizen -Suyy >> /home/shiru/temp/archInstallPhase4.sh
 echo trizen -S yay >> /home/shiru/temp/archInstallPhase4.sh
-echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm >> /home/shiru/temp/archInstallPhase4.sh --noconfirm
-echo sudo pacman -S xf86-video-intel >> /home/shiru/temp/archInstallPhase4.sh --noconfirm
-echo Section "InputClass" > /etc/X11/xorg.conf.d/00-keyboard.conf
-echo        Identifier "system-keyboard" >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo        MatchIsKeyboard "on" >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo        Option "XkbLayout" "hu" >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo        Option "XkbModel" "latitude" >> /etc/X11/xorg.conf.d/00-keyboard.conf
-echo EndSection >> /etc/X11/xorg.conf.d/00-keyboard.conf
-chown shiru home/shiru/temp/archInstallPhase4.sh
-chmod 777 home/shiru/temp/archInstallPhase4.sh
+echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
+echo sudo pacman -S xf86-video-intel --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
+echo sudo mv /home/shiru/temp/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf >> /home/shiru/temp/archInstallPhase4.sh
+chown shiru /home/shiru/temp/archInstallPhase4.sh
+chmod 777 /home/shiru/temp/archInstallPhase4.sh
 echo 
-echo ***************************************************************************************
-echo *                                                                                     *
-echo *  logout from root user & login your user account. Runing archInstallPase4.sh script *
-echo *  in your temp directory ~/temp.                                                     *
-echo *                                                                                     *
-echo ***************************************************************************************
+echo "***************************************************************************************"
+echo "*                                                                                     *"
+echo "*  logout from root user & login your user account. Runing archInstallPase4.sh script *"
+echo "*  in your temp directory ~/temp.                                                     *"
+echo "*                                                                                     *"
+echo "***************************************************************************************"
+rm /mnt/root/archInstallPhase3.sh
 EOF
 chmod 766 /mnt/root/archInstallPhase3.sh
+cat << EOF > /home/shiru/temp/00-keyboard.conf
+Section "InputClass"
+       Identifier "system-keyboard"
+       MatchIsKeyboard "on" 
+       Option "XkbLayout" "hu"
+       Option "XkbModel" "latitude"
+EndSection
+EOF
 echo 
 echo "****************************************************************************************************************************************" 
 echo "* Run arch-chroot /mnt. After in the /home directory you can find a scrip archIntall2phase.sh. Run this for continue the Installation. *"
