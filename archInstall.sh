@@ -25,7 +25,6 @@ cat << EOF >> /mnt/etc/locale.gen
 hu_HU.UTF-8 UTF-8
 en_US.UTF-8 UTF-8
 EOF
-locale-gen
 cat << EOF > /mnt/etc/locale.conf
 LANG=en_US.UTF-8
 LC_COLLATE=hu_HU.UTF-8
@@ -48,14 +47,14 @@ cat << EOF >> /mnt/etc/hosts
 EOF
 pacstrap /mnt networkmanager
 nano /mnt/etc/mkinitcpio.conf
-cat << EOF > /mnt/root/archIntallPhase2.sh
+cat << EOF > /mnt/root/archInstallPhase2.sh
 #!/bin/bash
 set -e
 locale-gen
 systemctl enable NetworkManager
-sudo pacman -S network-manager-applet xfce4-notifyd
+pacman -S network-manager-applet xfce4-notifyd --noconfirm
 passwd
-pacman -S grub efibootmgr
+pacman -S grub efibootmgr --noconfirm
 mkdir /boot/efi
 mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi --recheck
@@ -75,14 +74,14 @@ echo "**                                                                  **"
 echo "**********************************************************************"
 rm /home/archIntallPhase2.sh
 EOF
-chmod 766 /mnt/root/archIntallphase2.sh
+chmod 766 /mnt/root/archInstallPhase2.sh
 cat << EOF > /mnt/root/archInstallPhase3.sh
 #!/bin/bash
 set -e
 echo [multilib] >> /etc/pacman.conf
 echo Include = /etc/pacman.d/mirrorlist >> /etc/pacman.conf
 pacman -Suy
-pacman -S bash-completion
+pacman -S bash-completion --noconfirm
 useradd -m -g users -G audio,video,network,wheel,storage -s /bin/bash shiru
 passwd shiru
 EDITOR=nano visudo
@@ -97,8 +96,8 @@ echo cd trizen >> /home/shiru/temp/archInstallPhase4.sh
 echo makepkg -si >> /home/shiru/temp/archInstallPhase4.sh
 echo trizen -Suyy >> /home/shiru/temp/archInstallPhase4.sh
 echo trizen -S yay >> /home/shiru/temp/archInstallPhase4.sh
-echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm >> /home/shiru/temp/archInstallPhase4.sh
-echo sudo pacman -S xf86-video-intel >> /home/shiru/temp/archInstallPhase4.sh
+echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm >> /home/shiru/temp/archInstallPhase4.sh --noconfirm
+echo sudo pacman -S xf86-video-intel >> /home/shiru/temp/archInstallPhase4.sh --noconfirm
 echo Section "InputClass" > /etc/X11/xorg.conf.d/00-keyboard.conf
 echo        Identifier "system-keyboard" >> /etc/X11/xorg.conf.d/00-keyboard.conf
 echo        MatchIsKeyboard "on" >> /etc/X11/xorg.conf.d/00-keyboard.conf
