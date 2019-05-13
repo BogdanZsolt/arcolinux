@@ -46,6 +46,7 @@ cat << EOF >> /mnt/etc/hosts
 127.0.0.1 LucykaNotebook02.localdomain LucykaNotebook02
 EOF
 pacstrap /mnt networkmanager
+sed -i 's/HOOKS="base udev autodetect modconf block keyboard keymap filesystems fsck"/HOOKS="base udev autodetect modconf block keyboard keymap filesystems fsck shutdown"/' /mnt/etc/mkinitcpio.conf
 nano /mnt/etc/mkinitcpio.conf
 cat << EOF > /mnt/root/archInstallPhase2.sh
 #!/bin/bash
