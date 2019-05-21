@@ -6,7 +6,7 @@ timedatectl set-ntp true
 wipefs -a /dev/sda
 parted /dev/sda mklabel gpt
 sgdisk /dev/sda -n=1:0:+512M -t=1:ef00
-sgdisk /dev/sda -n=2:0:+30G -t=2:8300
+sgdisk /dev/sda -n=2:0:+40G -t=2:8300
 sgdisk /dev/sda -n=3:0:0
 mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/sda2
@@ -97,7 +97,7 @@ echo git clone https://aur.archlinux.org/trizen.git >> /home/shiru/temp/archInst
 echo cd trizen >> /home/shiru/temp/archInstallPhase4.sh
 echo makepkg -si >> /home/shiru/temp/archInstallPhase4.sh
 echo trizen -Suyy >> /home/shiru/temp/archInstallPhase4.sh
-echo trizen -S yay >> /home/shiru/temp/archInstallPhase4.sh
+echo trizen -S yay --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xf86-video-intel --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo mv /home/shiru/temp/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf >> /home/shiru/temp/archInstallPhase4.sh
