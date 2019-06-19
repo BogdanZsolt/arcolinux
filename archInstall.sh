@@ -101,8 +101,8 @@ echo trizen -S yay --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xf86-video-intel --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo mv /home/shiru/temp/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf >> /home/shiru/temp/archInstallPhase4.sh
-rm -rf $HOME/temp/trizen >> /home/shiru/temp/archInstallPhase4.sh 
-rm $HOME/temp/archInstallPhase4 >> /home/shiru/temp/archInstallPhase4.sh 
+echo rm -rf $HOME/temp/trizen >> /home/shiru/temp/archInstallPhase4.sh 
+echo rm $HOME/temp/archInstallPhase4 >> /home/shiru/temp/archInstallPhase4.sh 
 chown shiru /home/shiru/temp/archInstallPhase4.sh
 chmod 777 /home/shiru/temp/archInstallPhase4.sh
 mv /root/00-keyboard.conf /home/shiru/temp/00-keyboard.conf
