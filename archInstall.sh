@@ -83,7 +83,7 @@ echo [multilib] >> /etc/pacman.conf
 echo Include = /etc/pacman.d/mirrorlist >> /etc/pacman.conf
 pacman -Suy
 pacman -S bash-completion --noconfirm
-useradd -m -g users -G audio,video,network,wheel,storage -s /bin/bash shiru
+useradd -m -g users -G audio,video,network,wheel,storage,rfkill -s /bin/bash shiru
 passwd shiru
 EDITOR=nano visudo
 pacman -S git --noconfirm
@@ -92,7 +92,6 @@ chown shiru:users /home/shiru/temp
 echo "#!/bin/bash" > /home/shiru/temp/archInstallPhase4.sh
 echo set -e >> /home/shiru/temp/archInstallPhase4.sh
 echo >> /home/shiru/temp/archInstallPhase4.sh
-echo git clone https://github.com/bogdanzsolt/arch-i3 >> /home/shiru/temp/archInstallPhase4.sh
 echo git clone https://aur.archlinux.org/trizen.git >> /home/shiru/temp/archInstallPhase4.sh
 echo cd trizen >> /home/shiru/temp/archInstallPhase4.sh
 echo makepkg -si >> /home/shiru/temp/archInstallPhase4.sh
@@ -101,8 +100,8 @@ echo trizen -S yay --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xorg-server xorg-apps xorg-xinit xterm --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo pacman -S xf86-video-intel --noconfirm >> /home/shiru/temp/archInstallPhase4.sh
 echo sudo mv /home/shiru/temp/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf >> /home/shiru/temp/archInstallPhase4.sh
-echo rm -rf $HOME/temp/trizen >> /home/shiru/temp/archInstallPhase4.sh 
-echo rm $HOME/temp/archInstallPhase4 >> /home/shiru/temp/archInstallPhase4.sh 
+echo rm -rf /home/shiru/temp/trizen >> /home/shiru/temp/archInstallPhase4.sh 
+echo rm /home/shiru/temp/archInstallPhase4.sh >> /home/shiru/temp/archInstallPhase4.sh 
 chown shiru /home/shiru/temp/archInstallPhase4.sh
 chmod 777 /home/shiru/temp/archInstallPhase4.sh
 mv /root/00-keyboard.conf /home/shiru/temp/00-keyboard.conf
